@@ -86,6 +86,27 @@ class TicTacToe:
 
     #DoWorkHere
     def minimax(self, board, depth, player):
+        #First I will Check Base Case
+        #Lw Game Over
+        #Return Elly Ksb w Score
+        #Use checkWin Deh Return X Aw O Aw None==Tie
+        if self.gameOver():
+            winner= self.checkWin()
+            if winner==None:
+                return 0
+            elif winner=="X":
+                return -1
+            else:
+                return 1
+
+        Current_Score = float("-inf")#El Score Elly Hnsah :(
+        #OtherWise Play
+        validPalys = self.availableMoves()
+        for slot in validPalys:
+            self.makeMove(slot,player)
+            #Hn3ml Min Max
+            #Hnreturn Min Or Max 7sb Player
+            #Undo Step
         """
         Recursively analyze every possible game state and choose
         the best move location.
@@ -95,6 +116,7 @@ class TicTacToe:
         if depth is zero, then it's the root node or game is over (no more moves)
         """
         pass
+        #Return Score Aw3a Tnsaaaaa
 
 
 
@@ -107,20 +129,50 @@ def changePlayer(player):
 
 #DoWorkHere
 def make_best_move(board, depth, player):
+    #Iterate All over all Avaliable Postions
+    #Return The Poisition With Highest Score From MinMax
+    #Nagibooooo
+    ourGame=TicTacToe()
+    ourGame.board=board.board
+    Current_Score = float("-inf")
+    bestMove=-1
+    #ourGame.availableMoves()
+    for ValidPosition in ourGame.availableMoves():
+        #print(ValidPosition)
+        #Fill Place
+        ourGame.makeMove(ValidPosition,player)
+        #Call Algo and Best Score
+        score=ourGame.minimax(ourGame.board,0,"O")
+        #Undo Yacta
+        ourGame.board[ValidPosition]=" "
+        #check Score
+        if score>Current_Score:
+            Current_Score=score
+            bestMove=ValidPosition
+
     """
     Controllor function to initialize minimax and keep track of optimal move choices
     board - what board to calculate best move for
     depth - how far down the tree to go
     player - who to calculate best move for (Works ONLY for "O" right now)
     """
-    pass
+    return bestMove
 
+# TestGame=TicTacToe()
+# TestGame.board=      ["X", "O", "X",
+#                       "X", "O", "O",
+#                       "O", "X", "O"]
+# print("Nagibo")
+# if TestGame.checkWin()==None:
+#     print("Nagibo Tie")
 
 # Actual game
 if __name__ == '__main__':
     game = TicTacToe()
     game.show()
-
+    #x=game.availableMoves()
+    # print("nagibo")
+    # print(x)
     while game.gameOver() == False:
 
         isValid = False
