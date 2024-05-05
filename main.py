@@ -99,23 +99,34 @@ class TicTacToe:
             else:
                 return 1
 
-        Current_Score = float("-inf")#El Score Elly Hnsah :(
-        #OtherWise Play
-        validPalys = self.availableMoves()
-        for slot in validPalys:
-            self.makeMove(slot,player)
-            #Hn3ml Min Max
-            #Hnreturn Min Or Max 7sb Player
-            #Undo Step
-        """
-        Recursively analyze every possible game state and choose
-        the best move location.
-        node - the board
-        depth - how far down the tree to look
-        player - what player to analyze best move for (currently setup up ONLY for "O")
-        if depth is zero, then it's the root node or game is over (no more moves)
-        """
-        pass
+        if player== "O":
+            Current_Score = -5#El Score Elly Hnsah :(
+            #OtherWise Play
+            validPalys = self.availableMoves()
+            for slot in validPalys:
+                self.makeMove(slot,player)
+                Current_Score=max(self.minimax(board,depth+1,changePlayer(player)),Current_Score)
+                #board[slot]=" "
+                self.makeMove(slot," ")
+
+                #Hn3ml Min Max
+                #Hnreturn Min Or Max 7sb Player
+                #Undo Step
+            return Current_Score
+        else :
+            Current_Score = 5  # El Score Elly Hnsah :(
+            # OtherWise Play
+            validPalys = self.availableMoves()
+            for slot in validPalys:
+                self.makeMove(slot, player)
+                Current_Score = min(self.minimax(board, depth + 1, changePlayer(player)), Current_Score)
+                self.makeMove(slot," ")
+                # Hn3ml Min Max
+                # Hnreturn Min Or Max 7sb Player
+                # Undo Step
+            return Current_Score
+
+        #pass
         #Return Score Aw3a Tnsaaaaa
 
 
@@ -135,16 +146,18 @@ def make_best_move(board, depth, player):
     ourGame=TicTacToe()
     ourGame.board=board.board
     Current_Score = float("-inf")
-    bestMove=-1
+
     #ourGame.availableMoves()
     for ValidPosition in ourGame.availableMoves():
         #print(ValidPosition)
         #Fill Place
         ourGame.makeMove(ValidPosition,player)
         #Call Algo and Best Score
-        score=ourGame.minimax(ourGame.board,0,"O")
+        score=ourGame.minimax(ourGame.board,0,"X")
         #Undo Yacta
-        ourGame.board[ValidPosition]=" "
+        #ourGame.board[ValidPosition]=" "
+        ourGame.makeMove(ValidPosition, " ")
+
         #check Score
         if score>Current_Score:
             Current_Score=score
