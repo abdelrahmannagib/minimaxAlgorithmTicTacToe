@@ -145,7 +145,7 @@ def make_best_move(board, depth, player):
     #Nagibooooo
     ourGame=TicTacToe()
     ourGame.board=board.board
-    Current_Score = float("-inf")
+    Current_Score = -5
 
     #ourGame.availableMoves()
     for ValidPosition in ourGame.availableMoves():
