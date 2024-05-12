@@ -99,7 +99,7 @@ class TicTacToe:
             else:
                 return 1
 
-        if player== "O":
+        if depth%2 == 0:
             Current_Score = -5#El Score Elly Hnsah :(
             #OtherWise Play
             validPalys = self.availableMoves()
@@ -153,7 +153,7 @@ def make_best_move(board, depth, player):
         #Fill Place
         ourGame.makeMove(ValidPosition,player)
         #Call Algo and Best Score
-        score=ourGame.minimax(ourGame.board,0,"X")
+        score=ourGame.minimax(ourGame.board,depth+1,"X")
         #Undo Yacta
         #ourGame.board[ValidPosition]=" "
         ourGame.makeMove(ValidPosition, " ")
