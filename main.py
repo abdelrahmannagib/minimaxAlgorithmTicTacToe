@@ -198,7 +198,7 @@ if __name__ == '__main__':
             break
 
         print("Computer choosing move...")
-        ai_move = make_best_move(game, -1, "O")
+        ai_move = make_best_move(game, 0, "O")
         game.makeMove(ai_move, "O")
         game.show()
 
