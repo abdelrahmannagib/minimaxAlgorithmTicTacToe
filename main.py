@@ -99,13 +99,14 @@ class TicTacToe:
             else:
                 return 1
 
-        if depth%2 == 0:
+        #if abs(depth%2) != 0: #O Player
+        if player=='O':
             Current_Score = -5#El Score Elly Hnsah :(
             #OtherWise Play
             validPalys = self.availableMoves()
             for slot in validPalys:
                 self.makeMove(slot,player)
-                Current_Score=max(self.minimax(board,depth+1,changePlayer(player)),Current_Score)
+                Current_Score=max(self.minimax(board,depth-1,changePlayer(player)),Current_Score)
                 #board[slot]=" "
                 self.makeMove(slot," ")
 
@@ -119,7 +120,7 @@ class TicTacToe:
             validPalys = self.availableMoves()
             for slot in validPalys:
                 self.makeMove(slot, player)
-                Current_Score = min(self.minimax(board, depth + 1, changePlayer(player)), Current_Score)
+                Current_Score = min(self.minimax(board, depth - 1, changePlayer(player)), Current_Score)
                 self.makeMove(slot," ")
                 # Hn3ml Min Max
                 # Hnreturn Min Or Max 7sb Player
@@ -153,7 +154,7 @@ def make_best_move(board, depth, player):
         #Fill Place
         ourGame.makeMove(ValidPosition,player)
         #Call Algo and Best Score
-        score=ourGame.minimax(ourGame.board,depth+1,"X")
+        score=ourGame.minimax(ourGame.board,depth-1,"X")
         #Undo Yacta
         #ourGame.board[ValidPosition]=" "
         ourGame.makeMove(ValidPosition, " ")
@@ -198,7 +199,7 @@ if __name__ == '__main__':
             break
 
         print("Computer choosing move...")
-        ai_move = make_best_move(game, 0, "O")
+        ai_move = make_best_move(game, -1, "O")
         game.makeMove(ai_move, "O")
         game.show()
 
@@ -208,3 +209,45 @@ print("Game Over. " + game.whoWon() + " Wins")
 # Implement the following 2 functions:
 # make_best_move
 # minimax
+
+
+# def minimax(self, board, depth, player):
+#     # First I will Check Base Case
+#     # Lw Game Over
+#     # Return Elly Ksb w Score
+#     # Use checkWin Deh Return X Aw O Aw None==Tie
+#     if self.gameOver():
+#         winner = self.checkWin()
+#         if winner == None:
+#             return 0
+#         elif winner == "X":
+#             return -1
+#         else:
+#             return 1
+#
+#     if depth % 2 == 0:
+#         Current_Score = -5  # El Score Elly Hnsah :(
+#         # OtherWise Play
+#         validPalys = self.availableMoves()
+#         for slot in validPalys:
+#             self.makeMove(slot, player)
+#             Current_Score = max(self.minimax(board, depth + 1, changePlayer(player)), Current_Score)
+#             # board[slot]=" "
+#             self.makeMove(slot, " ")
+#
+#             # Hn3ml Min Max
+#             # Hnreturn Min Or Max 7sb Player
+#             # Undo Step
+#         return Current_Score
+#     else:
+#         Current_Score = 5  # El Score Elly Hnsah :(
+#         # OtherWise Play
+#         validPalys = self.availableMoves()
+#         for slot in validPalys:
+#             self.makeMove(slot, player)
+#             Current_Score = min(self.minimax(board, depth + 1, changePlayer(player)), Current_Score)
+#             self.makeMove(slot, " ")
+#             # Hn3ml Min Max
+#             # Hnreturn Min Or Max 7sb Player
+#             # Undo Step
+#         return Current_Score
